@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱情岛-爱情岛游戏玩法_岛屿建造与恋爱经营</title>
+<meta name="description" content="爱情岛是一款以海岛建造与恋爱经营为主题的游戏，玩家可以在岛上结识居民、布置家园、推进故事。本页介绍爱情岛的核心玩法、岛屿建设、角色互动与常见问题。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff8fa3'/%3E%3Cstop offset='1' stop-color='%23ff5d73'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23g)'/%3E%3Cpath d='M32 48c-9-6-14-11-14-17a7 7 0 0 1 14-3 7 7 0 0 1 14 3c0 6-5 11-14 17z' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{
+  --rose:#ff5d73;
+  --rose-deep:#e03e58;
+  --rose-soft:#ffe4e8;
+  --sand:#fff8f2;
+  --ink:#33262b;
+  --ink-soft:#6d5b62;
+  --line:#f3d9de;
+  --sea:#2f9e9a;
+  --sea-soft:#e0f4f2;
+  --gold:#e8a13a;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(224,62,88,.10);
+  --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--sand);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 22px}
+
+/* ---------- header ---------- */
+.site-head{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,248,242,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.head-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 22px;max-width:var(--max);margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.22rem;letter-spacing:.02em;color:var(--rose-deep)}
+.brand svg{width:38px;height:38px;flex:0 0 auto}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{
+  padding:7px 13px;border-radius:999px;font-size:.92rem;color:var(--ink-soft);
+  transition:.2s;
+}
+.nav a:hover,.nav a:focus-visible{background:var(--rose-soft);color:var(--rose-deep)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;background:#fff;padding:8px 14px;border-radius:8px;z-index:99}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(170deg,#fff4f5 0%,#ffe9ee 42%,#e6f7f5 100%)}
+.hero-inner{
+  max-width:var(--max);margin:0 auto;padding:58px 22px 64px;
+  display:grid;grid-template-columns:1.12fr .88fr;gap:38px;align-items:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--line);
+  color:var(--rose-deep);font-size:.82rem;font-weight:700;
+  padding:5px 14px;border-radius:999px;margin-bottom:18px;
+}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--sea)}
+h1{
+  font-size:clamp(2rem,4.6vw,3rem);
+  line-height:1.2;font-weight:900;letter-spacing:-.01em;
+  color:var(--ink);
+}
+h1 .hl{color:var(--rose-deep)}
+.hero-lead{margin-top:16px;font-size:1.02rem;color:var(--ink-soft);max-width:34em}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:999px;font-weight:700;font-size:.96rem;
+  border:1.5px solid transparent;cursor:pointer;transition:.2s;
+}
+.btn-main{background:var(--rose);color:#fff;box-shadow:0 8px 20px rgba(255,93,115,.32)}
+.btn-main:hover{background:var(--rose-deep);transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--rose);color:var(--rose-deep)}
+.btn[aria-disabled="true"]{opacity:.55;pointer-events:none}
+.hero-stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.hero-stats div{font-size:.86rem;color:var(--ink-soft)}
+.hero-stats b{display:block;font-size:1.28rem;color:var(--rose-deep);font-weight:800;line-height:1.3}
+.hero-art{position:relative}
+.hero-art .island-card{
+  background:#fff;border-radius:26px;padding:14px;
+  box-shadow:var(--shadow);border:1px solid var(--line);
+  transform:rotate(-1.4deg);
+}
+.hero-art .island-card svg{border-radius:16px}
+
+/* ---------- section ---------- */
+.section{padding:62px 0}
+.section.alt{background:#fff}
+.sec-head{max-width:44em;margin-bottom:34px}
+.sec-tag{
+  font-size:.8rem;font-weight:800;letter-spacing:.14em;
+  color:var(--sea);text-transform:uppercase;margin-bottom:8px;
+}
+h2{font-size:clamp(1.4rem,2.6vw,1.85rem);line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.sec-head p{margin-top:10px;color:var(--ink-soft);font-size:.98rem}
+
+/* grid cards */
+.grid{display:grid;gap:20px}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 22px;transition:.22s;position:relative;overflow:hidden;
+}
+.section.alt .card{background:var(--sand)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#f5c3cc}
+.card .ico{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  background:var(--rose-soft);color:var(--rose-deep);margin-bottom:14px;
+}
+.card .ico svg{width:22px;height:22px}
+.card h3{font-size:1.06rem;font-weight:800;margin-bottom:8px}
+.card p{font-size:.92rem;color:var(--ink-soft)}
+.card .meta{margin-top:14px;font-size:.8rem;color:var(--sea);font-weight:700}
+
+/* steps */
+.steps{display:grid;gap:0;border-left:2px dashed var(--line);margin-left:8px}
+.step{position:relative;padding:0 0 28px 28px}
+.step:last-child{padding-bottom:0}
+.step::before{
+  content:"";position:absolute;left:-9px;top:5px;
+  width:16px;height:16px;border-radius:50%;background:var(--rose);
+  border:3px solid #fff;box-shadow:0 0 0 1px var(--line);
+}
+.step h3{font-size:1rem;font-weight:800;margin-bottom:4px}
+.step p{font-size:.92rem;color:var(--ink-soft)}
+
+/* two-col feature */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.split .art{background:#fff;border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:var(--shadow)}
+.split ul{list-style:none;display:grid;gap:14px;margin-top:18px}
+.split li{display:flex;gap:11px;font-size:.94rem;color:var(--ink-soft)}
+.split li svg{width:20px;height:20px;flex:0 0 auto;color:var(--sea);margin-top:3px}
+.split li b{color:var(--ink)}
+
+/* filter */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.chip{
+  padding:8px 18px;border-radius:999px;border:1.5px solid var(--line);
+  background:#fff;font-size:.9rem;font-weight:600;color:var(--ink-soft);
+  cursor:pointer;transition:.18s;font-family:inherit;
+}
+.chip:hover{border-color:var(--rose);color:var(--rose-deep)}
+.chip.on{background:var(--rose);border-color:var(--rose);color:#fff}
+.house-card[hidden]{display:none}
+.house-card .thumb{
+  height:110px;border-radius:12px;margin-bottom:14px;
+  background:linear-gradient(135deg,#ffe4e8,#e0f4f2);
+  display:grid;place-items:center;
+}
+.house-card .thumb svg{width:56px;height:56px}
+.house-card .tagline{display:inline-block;font-size:.76rem;font-weight:700;color:var(--sea);background:var(--sea-soft);padding:2px 10px;border-radius:999px;margin-bottom:8px}
+.house-card p{font-size:.9rem;color:var(--ink-soft)}
+.empty-note{display:none;font-size:.92rem;color:var(--ink-soft);padding:10px 0}
+
+/* faq */
+.faq details{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:16px 20px;margin-bottom:12px;
+}
+.faq summary{
+  font-weight:700;font-size:.97rem;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:14px;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.2rem;color:var(--rose);font-weight:400;transition:.2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:10px;font-size:.92rem;color:var(--ink-soft)}
+
+/* cta band */
+.cta-band{
+  background:linear-gradient(120deg,#ff8fa3,#ff5d73 55%,#e03e58);
+  border-radius:26px;padding:44px 38px;color:#fff;
+  display:flex;justify-content:space-between;gap:26px;align-items:center;flex-wrap:wrap;
+}
+.cta-band h2{color:#fff;font-size:1.5rem}
+.cta-band p{margin-top:8px;font-size:.95rem;color:rgba(255,255,255,.88);max-width:36em}
+.cta-band .btn{background:#fff;color:var(--rose-deep);flex:0 0 auto}
+
+/* footer */
+.site-foot{background:#2b2026;color:#cbb9bf;padding:46px 0 30px;margin-top:20px}
+.foot-top{display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem;color:#fff}
+.foot-brand svg{width:34px;height:34px}
+.foot-brand .fdesc{display:block;font-size:.84rem;font-weight:400;color:#a8939b;margin-top:4px}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:.9rem}
+.foot-links a:hover{color:#fff}
+.foot-bottom{padding-top:18px;font-size:.82rem;color:#8f7c84;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* responsive */
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;padding:40px 22px 48px}
+  .hero-art{order:-1;max-width:420px}
+  .split{grid-template-columns:1fr;gap:26px}
+  .grid.c3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .head-inner{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 18px}
+  .nav{gap:2px}
+  .nav a{padding:6px 10px;font-size:.86rem}
+  .grid.c3,.grid.c2{grid-template-columns:1fr}
+  .section{padding:44px 0}
+  .hero-stats{gap:18px}
+  .cta-band{padding:32px 24px}
+  .wrap{padding:0 18px}
+  h1{font-size:1.9rem}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="#top" aria-label="爱情岛首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8fa3"/><stop offset="1" stop-color="#ff5d73"/></linearGradient></defs>
+        <circle cx="32" cy="32" r="30" fill="url(#lg)"/>
+        <path d="M32 48c-9-6-14-11-14-17a7 7 0 0 1 14-3 7 7 0 0 1 14 3c0 6-5 11-14 17z" fill="#fff"/>
+      </svg>
+      爱情岛
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#play">玩法</a>
+      <a href="#build">建造</a>
+      <a href="#houses">岛屿地图</a>
+      <a href="#steps">上手</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow"><i></i>海岛建造 · 恋爱经营</span>
+        <h1>爱情岛</h1>
+        <p class="hero-lead">爱情岛把一座荒芜的小岛交到你手里。你可以铺路、盖房、种树，也可以与岛上的居民慢慢熟络，在建造与相处之间把岛屿变成自己喜欢的样子。这里没有倒计时，只有一步一步的积累。</p>
+        <div class="hero-actions">
+          <a class="btn btn-main" href="#play">了解爱情岛玩法
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#houses">查看岛屿地图</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>3 类</b>核心玩法</div>
+          <div><b>6 处</b>岛屿区域</div>
+          <div><b>每日</b>可推进剧情</div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="island-card">
+          <svg viewBox="0 0 480 340" role="img" aria-label="爱情岛插画：海面上的小岛、木屋与棕榈树">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1f3"/><stop offset="1" stop-color="#ffe1e7"/></linearGradient>
+              <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fdcd6"/><stop offset="1" stop-color="#4fbdb7"/></linearGradient>
+              <linearGradient id="sandg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9c9"/><stop offset="1" stop-color="#f6d4a4"/></linearGradient>
+            </defs>
+            <rect width="480" height="340" rx="16" fill="url(#sky)"/>
+            <circle cx="386" cy="72" r="30" fill="#ffd0d8"/>
+            <path d="M0 210h480v130H0z" fill="url(#sea)"/>
+            <path d="M0 240c60-12 110 10 170 4s120-18 180-8 90 14 130 6v98H0z" fill="#3fada7" opacity=".35"/>
+            <ellipse cx="240" cy="236" rx="150" ry="42" fill="url(#sandg)"/>
+            <ellipse cx="240" cy="236" rx="150" ry="42" fill="none" stroke="#fff" stroke-width="2" opacity=".5"/>
+            <!-- house -->
+            <rect x="196" y="168" width="86" height="58" rx="5" fill="#fff"/>
+            <path d="M188 170l51-40 51 40z" fill="#ff6f83"/>
+            <rect x="222" y="190" width="22" height="36" rx="3" fill="#ffd9df"/>
+            <rect x="252" y="190" width="18" height="18" rx="3" fill="#bfe9e6"/>
+            <!-- palm -->
+            <path d="M330 214c2-26 6-42 14-54" stroke="#a9784c" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M344 160c-16-4-28 2-34 12 12 2 24-1 34-12zM344 160c14-6 28-2 34 8-12 4-24 1-34-8zM344 160c-8-14-4-26 6-32 4 12 2 24-6 32zM344 160c8-12 20-16 32-12-8 12-20 16-32 12z" fill="#4fbdb7"/>
+            <!-- flowers -->
+            <circle cx="150" cy="222" r="7" fill="#ff8fa3"/>
+            <circle cx="136" cy="230" r="5" fill="#ffb3be"/>
+            <circle cx="330" cy="230" r="6" fill="#ff8fa3"/>
+            <!-- boat -->
+            <path d="M64 268h54l-10 14H74z" fill="#fff"/>
+            <path d="M91 268v-26l22 26z" fill="#ffb3be"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAY -->
+  <section class="section" id="play">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Core Gameplay</div>
+        <h2>爱情岛的三条主线：建造、相处、探索</h2>
+        <p>爱情岛并不要求你按顺序推进。三条主线相互补充：建造改变岛屿的样子，相处解锁居民的故事，探索则把新的地块和资源带回岛上。</p>
+      </div>
+      <div class="grid c3">
+        <article class="card">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+          </div>
+          <h3>岛屿建造</h3>
+          <p>从一块空地开始，用木材、石料与装饰物规划道路、房屋与花圃。建造等级提升后，可解锁更多建筑样式与可放置地块。</p>
+          <div class="meta">改变外观 · 提升容量</div>
+        </article>
+        <article class="card">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+          </div>
+          <h3>居民相处</h3>
+          <p>岛上的居民各有性格与偏好。通过对话、送礼和共同活动提升好感，好感达到一定阶段后会开启属于他们的个人故事。</p>
+          <div class="meta">对话选择 · 好感阶段</div>
+        </article>
+        <article class="card">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5z"/></svg>
+          </div>
+          <h3>海域探索</h3>
+          <p>乘船前往周边的浅滩与小岛，收集贝壳、木材等材料。探索途中会遇到随机事件，选择不同处理方式会带来不同的材料回报。</p>
+          <div class="meta">资源获取 · 随机事件</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILD -->
+  <section class="section alt" id="build">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="sec-tag">Island Building</div>
+          <h2>在爱情岛上，建造不只是摆家具</h2>
+          <p style="color:var(--ink-soft);margin-top:10px;font-size:.97rem">爱情岛的建造系统与岛上生活相互牵连。你放下的每一处设施都会影响居民的活动范围，也会改变后续能触发的日常片段。</p>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><b>地块规划：</b>道路连通住宅与公共区域后，居民会沿路活动，岛上的日常场景随之变多。</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><b>材料循环：</b>建造消耗木材与石料，探索和居民委托补充材料，形成稳定的资源节奏。</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><b>风格自定：</b>同一块地可替换多种装饰主题，岛屿外观完全由你的选择决定，不设唯一答案。</span>
+            </li>
+          </ul>
+        </div>
+        <div class="art">
+          <svg viewBox="0 0 460 320" role="img" aria-label="爱情岛建造示意：网格地块上分布木屋、花圃与小路">
+            <rect width="460" height="320" rx="14" fill="#fff8f2"/>
+            <g stroke="#f3d9de" stroke-width="1">
+              <path d="M0 64h460M0 128h460M0 192h460M0 256h460"/>
+              <path d="M92 0v320M184 0v320M276 0v320M368 0v320"/>
+            </g>
+            <rect x="94" y="66" width="88" height="60" rx="6" fill="#fff" stroke="#ffb3be" stroke-width="2"/>
+            <path d="M96 68l42-32 42 32z" fill="#ff8fa3"/>
+            <rect x="278" y="194" width="88" height="60" rx="6" fill="#fff" stroke="#bfe9e6" stroke-width="2"/>
+            <path d="M280 196l42-32 42 32z" fill="#4fbdb7"/>
+            <rect x="186" y="130" width="88" height="60" rx="6" fill="#ffe4e8"/>
+            <circle cx="230" cy="160" r="14" fill="#ff8fa3"/>
+            <path d="M230 174v-14" stroke="#fff" stroke-width="3"/>
+            <path d="M0 258h460" stroke="#e8a13a" stroke-width="5" stroke-dasharray="14 10" opacity=".55"/>
+            <circle cx="330" cy="98" r="9" fill="#ff8fa3"/>
+            <circle cx="352" cy="112" r="6" fill="#ffb3be"/>
+            <circle cx="128" cy="240" r="7" fill="#4fbdb7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOUSES / MAP with filter -->
+  <section class="section" id="houses">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Island Map</div>
+        <h2>爱情岛上的六处区域</h2>
+        <p>岛屿按功能分为六处区域，彼此通过小路相连。可按类型筛选查看，每处区域在爱情岛中承担不同的日常功能。</p>
+      </div>
+      <div class="filter-bar" role="group" aria-label="按区域类型筛选">
+        <button class="chip on" data-filter="all" type="button">全部</button>
+        <button class="chip" data-filter="live" type="button">居住</button>
+        <button class="chip" data-filter="fun" type="button">休闲</button>
+        <button class="chip" data-filter="work" type="button">生产</button>
+      </div>
+      <div class="grid c3" id="houseGrid">
+        <article class="card house-card" data-type="live">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff5d73" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+          </div>
+          <span class="tagline">居住</span>
+          <h3>微风住宅区</h3>
+          <p>最早的落脚点，也是居民最集中的区域。房屋密度较高，适合优先铺设道路与照明，让日常场景更容易出现。</p>
+        </article>
+        <article class="card house-card" data-type="fun">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2f9e9a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>
+          </div>
+          <span class="tagline">休闲</span>
+          <h3>海风广场</h3>
+          <p>开阔的公共空间，放置长椅与花坛后，居民会在此停留交谈。广场是触发多人互动片段的主要场所。</p>
+        </article>
+        <article class="card house-card" data-type="work">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8a13a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg>
+          </div>
+          <span class="tagline">生产</span>
+          <h3>木工坊</h3>
+          <p>把探索带回的木材加工为建造材料。工坊等级决定可制作的部件种类，也影响部分建筑的解锁条件。</p>
+        </article>
+        <article class="card house-card" data-type="fun">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2f9e9a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+          </div>
+          <span class="tagline">休闲</span>
+          <h3>浅滩码头</h3>
+          <p>前往外海的出发点，也是贝壳类材料的收集地。潮汐变化会让可拾取的材料种类略有不同。</p>
+        </article>
+        <article class="card house-card" data-type="work">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8a13a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <span class="tagline">生产</span>
+          <h3>花圃与果园</h3>
+          <p>种植花卉与果树，产出装饰用植物和礼物素材。不同花卉开放时间不同，安排种植顺序需要一点规划。</p>
+        </article>
+        <article class="card house-card" data-type="live">
+          <div class="thumb">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff5d73" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+          </div>
+          <span class="tagline">居住</span>
+          <h3>山丘小屋</h3>
+          <p>地势较高、相对安静的居住区。适合放置需要安静环境的建筑，部分居民更愿意在这一带活动。</p>
+        </article>
+      </div>
+      <p class="empty-note" id="emptyNote">该类型下暂无区域，试试其他筛选。</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="section alt" id="steps">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Getting Started</div>
+        <h2>进入爱情岛之后，先做这几件事</h2>
+        <p>爱情岛前期不需要追求完美布局。先让岛屿运转起来，再考虑风格与细节，节奏会轻松很多。</p>
+      </div>
+      <div class="split">
+        <div class="steps">
+          <div class="step">
+            <h3>第一步：连通主路</h3>
+            <p>把住宅区与广场用道路连起来，居民开始沿路活动，日常对话和委托会随之出现。</p>
+          </div>
+          <div class="step">
+            <h3>第二步：建好木工坊</h3>
+            <p>木材是早期最紧缺的材料。优先升级木工坊，能显著减少等待材料的时间。</p>
+          </div>
+          <div class="step">
+            <h3>第三步：认识两三位居民</h3>
+            <p>不必一次照顾所有人。先和常出现的居民建立好感，解锁的故事会带来新的建造图纸。</p>
+          </div>
+          <div class="step">
+            <h3>第四步：出一次海</h3>
+            <p>完成首次探索后，码头会开放更多航线。带回的贝壳可用于广场装饰，也能作为礼物。</p>
+          </div>
+        </div>
+        <div class="art">
+          <svg viewBox="0 0 440 300" role="img" aria-label="爱情岛上手路线示意：从住宅到广场再到码头">
+            <rect width="440" height="300" rx="14" fill="#fff8f2"/>
+            <path d="M60 230c40-50 60-30 100-70s60-50 100-70 60-10 90-50" stroke="#ffb3be" stroke-width="4" fill="none" stroke-dasharray="10 8" stroke-linecap="round"/>
+            <circle cx="60" cy="230" r="14" fill="#ff5d73"/>
+            <text x="60" y="236" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif" font-weight="700">1</text>
+            <circle cx="170" cy="152" r="14" fill="#ff8fa3"/>
+            <text x="170" y="158" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif" font-weight="700">2</text>
+            <circle cx="278" cy="96" r="14" fill="#4fbdb7"/>
+            <text x="278" y="102" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif" font-weight="700">3</text>
+            <circle cx="372" cy="60" r="14" fill="#e8a13a"/>
+            <text x="372" y="66" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif" font-weight="700">4</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">FAQ</div>
+        <h2>关于爱情岛的常见问题</h2>
+        <p>以下回答基于当前页面介绍的游戏内容整理，具体数值与开放顺序可能随版本调整。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>爱情岛需要每天登录吗？</summary>
+          <p>不需要强制登录。爱情岛的建造与探索会按时间积累材料，隔几天回来也能继续推进，只是部分日常互动需要当天在线才会出现。</p>
+        </details>
+        <details>
+          <summary>建造布局可以重新调整吗？</summary>
+          <p>可以。已放置的建筑与装饰能够移动或替换，道路也可以重新铺设。早期布局不必反复纠结，后续调整不会损失主要材料。</p>
+        </details>
+        <details>
+          <summary>好感度提升后有什么变化？</summary>
+          <p>好感度达到不同阶段，居民会开放新的对话与个人故事，部分故事完成后会提供建造图纸或装饰素材，影响岛屿的可选风格。</p>
+        </details>
+        <details>
+          <summary>岛屿区域需要按顺序解锁吗？</summary>
+          <p>大体遵循从住宅区向外扩展的顺序，但休闲与生产区域之间没有严格先后。你可以先建码头出海，也可以先把广场布置好。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-band">
+        <div>
+          <h2>把爱情岛慢慢建成你的样子</h2>
+          <p>先连通一条小路，再认识第一位居民。爱情岛的乐趣来自这些具体而细小的推进，而不是一次完成的完美布局。</p>
+        </div>
+        <a class="btn" href="#build">查看建造要点</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#ff5d73"/>
+          <path d="M32 48c-9-6-14-11-14-17a7 7 0 0 1 14-3 7 7 0 0 1 14 3c0 6-5 11-14 17z" fill="#fff"/>
+        </svg>
+        <div>爱情岛
+          <span class="fdesc">海岛建造 · 恋爱经营</span>
+        </div>
+      </div>
+      <nav class="foot-links" aria-label="页尾导航">
+        <a href="#play">玩法</a>
+        <a href="#build">建造</a>
+        <a href="#houses">岛屿地图</a>
+        <a href="#steps">上手</a>
+        <a href="#faq">常见问题</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>爱情岛 · 本页内容为主题介绍，不构成版本承诺。</span>
+      <span>页面信息以实际游戏内容为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chips = document.querySelectorAll('.chip');
+  var cards = document.querySelectorAll('.house-card');
+  var note = document.getElementById('emptyNote');
+  chips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      chips.forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      var f = btn.getAttribute('data-filter');
+      var shown = 0;
+      cards.forEach(function(c){
+        var ok = (f === 'all' || c.getAttribute('data-type') === f);
+        c.hidden = !ok;
+        if(ok) shown++;
+      });
+      note.style.display = shown ? 'none' : 'block';
+    });
+  });
+})();
+</script>
+</body>
+            </html>
