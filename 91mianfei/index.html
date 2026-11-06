@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91免费看在线观看-免费在线观看高清影视_91免费看在线观看资源导航</title>
+<meta name="description" content="91免费看在线观看是一个聚合免费在线观看入口的导航页面，整理高清影视、热门剧集与短视频等在线观看资源，帮助访客快速找到可观看的内容入口。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23111a2b'/%3E%3Cpath d='M24 18l22 14-22 14z' fill='%23ff5a4d'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0d1220;
+  --bg-soft:#141b2e;
+  --card:#18213a;
+  --line:rgba(255,255,255,.09);
+  --text:#eef1f8;
+  --muted:#a3adc4;
+  --accent:#ff5a4d;
+  --accent-2:#ffb03a;
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;max-width:100%;}
+.wrap{width:min(1120px,92vw);margin:0 auto;}
+
+/* 页头 */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(13,18,32,.86);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.head-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:14px 0;flex-wrap:wrap;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:.2px;}
+.logo .mark{
+  width:36px;height:36px;border-radius:11px;
+  background:linear-gradient(135deg,#ff5a4d,#ffb03a);
+  display:grid;place-items:center;flex:none;
+  box-shadow:0 6px 18px rgba(255,90,77,.28);
+}
+nav.main{display:flex;gap:6px;flex-wrap:wrap;}
+nav.main a{
+  font-size:14px;color:var(--muted);padding:7px 12px;border-radius:9px;
+  transition:.2s;
+}
+nav.main a:hover{color:var(--text);background:rgba(255,255,255,.06);}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;
+  background:linear-gradient(135deg,#ff5a4d,#ff8a3a);color:#fff;
+  border:none;cursor:pointer;transition:.2s;
+  box-shadow:0 8px 22px rgba(255,90,77,.3);
+}
+.btn:hover{transform:translateY(-1px);}
+.btn.ghost{
+  background:transparent;border:1px solid var(--line);color:var(--text);
+  box-shadow:none;
+}
+.btn.ghost:hover{background:rgba(255,255,255,.06);}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;
+  padding:64px 0 56px;
+  background:
+    radial-gradient(900px 420px at 82% -8%, rgba(255,90,77,.22), transparent 62%),
+    radial-gradient(700px 380px at 6% 110%, rgba(255,176,58,.14), transparent 60%);
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;color:var(--accent-2);letter-spacing:1.5px;
+  border:1px solid rgba(255,176,58,.35);border-radius:999px;
+  padding:5px 14px;margin-bottom:18px;
+}
+h1{
+  font-size:clamp(28px,4.4vw,46px);
+  line-height:1.24;font-weight:800;letter-spacing:.5px;
+  margin-bottom:18px;
+}
+h1 .hl{
+  background:linear-gradient(120deg,#ff5a4d,#ffb03a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{
+  color:var(--muted);font-size:15.5px;max-width:34em;margin-bottom:26px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-facts{
+  display:flex;gap:30px;margin-top:34px;flex-wrap:wrap;
+}
+.fact b{display:block;font-size:22px;color:var(--accent-2);line-height:1.2;}
+.fact span{font-size:13px;color:var(--muted);}
+
+/* 首屏视觉 */
+.stage{
+  position:relative;border-radius:24px;padding:22px;
+  background:linear-gradient(160deg,#1c2540,#121a2d);
+  border:1px solid var(--line);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8);
+}
+.screen{
+  border-radius:16px;overflow:hidden;
+  background:#0a0f1c;border:1px solid rgba(255,255,255,.07);
+}
+.screen svg{width:100%;height:auto;}
+.stage .tag{
+  position:absolute;top:-12px;right:22px;
+  font-size:12px;padding:5px 12px;border-radius:999px;
+  background:var(--accent);color:#fff;font-weight:600;
+  box-shadow:0 6px 16px rgba(255,90,77,.4);
+}
+
+/* 通用区块 */
+section{padding:54px 0;}
+.sec-head{margin-bottom:28px;}
+.sec-head h2{
+  font-size:clamp(21px,2.6vw,27px);font-weight:800;letter-spacing:.4px;
+}
+.sec-head p{color:var(--muted);font-size:14.5px;margin-top:8px;max-width:52em;}
+
+/* 入口卡片 */
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:22px;
+  transition:.25s;position:relative;overflow:hidden;
+}
+.card::after{
+  content:"";position:absolute;inset:auto -30% -60% auto;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,77,.16),transparent 70%);
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,90,77,.45);}
+.card .ico{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(255,90,77,.14);margin-bottom:14px;
+}
+.card h3{font-size:16.5px;margin-bottom:8px;}
+.card p{font-size:13.8px;color:var(--muted);line-height:1.7;}
+.card .go{display:inline-block;margin-top:14px;font-size:13.5px;color:var(--accent-2);font-weight:600;}
+
+/* 列表区 */
+.list-band{
+  background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.rows{display:grid;gap:12px;}
+.row{
+  display:grid;grid-template-columns:52px 1fr auto;gap:16px;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 18px;transition:.2s;
+}
+.row:hover{border-color:rgba(255,176,58,.4);}
+.row .num{
+  font-weight:800;font-size:17px;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.row h4{font-size:15px;margin-bottom:3px;}
+.row p{font-size:13px;color:var(--muted);}
+.row .meta{font-size:12.5px;color:var(--muted);white-space:nowrap;}
+
+/* 两栏说明 */
+.split{
+  display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;
+}
+.prose h2{font-size:clamp(20px,2.4vw,25px);margin-bottom:14px;}
+.prose p{color:var(--muted);font-size:14.8px;margin-bottom:14px;}
+.prose p strong{color:var(--text);font-weight:600;}
+.tips{
+  background:linear-gradient(165deg,#1d2740,#141c2f);
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+}
+.tips h3{font-size:16px;margin-bottom:14px;}
+.tips ul{list-style:none;display:grid;gap:12px;}
+.tips li{
+  font-size:13.8px;color:var(--muted);padding-left:22px;position:relative;
+}
+.tips li::before{
+  content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;
+  background:linear-gradient(135deg,#ff5a4d,#ffb03a);
+}
+
+/* 搜索筛选 */
+.filter-bar{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;
+}
+.filter-bar input{
+  flex:1 1 240px;min-width:0;
+  background:var(--card);border:1px solid var(--line);color:var(--text);
+  border-radius:11px;padding:11px 16px;font-size:14px;outline:none;
+  font-family:inherit;
+}
+.filter-bar input:focus{border-color:rgba(255,90,77,.55);}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{
+  font-size:13px;padding:8px 15px;border-radius:999px;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);color:var(--muted);
+  transition:.2s;font-family:inherit;
+}
+.chip.active,.chip:hover{background:rgba(255,90,77,.16);border-color:rgba(255,90,77,.5);color:#fff;}
+.grid-items{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.item{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:16px;transition:.2s;
+}
+.item:hover{transform:translateY(-3px);border-color:rgba(255,176,58,.4);}
+.item .badge{
+  display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:6px;
+  background:rgba(255,176,58,.16);color:var(--accent-2);margin-bottom:10px;
+}
+.item h4{font-size:14.5px;margin-bottom:6px;}
+.item p{font-size:12.8px;color:var(--muted);}
+.empty{color:var(--muted);font-size:14px;padding:20px 0;display:none;}
+
+/* 下载区 */
+.dl{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  background:linear-gradient(120deg,rgba(255,90,77,.14),rgba(255,176,58,.08));
+  border:1px solid rgba(255,90,77,.28);border-radius:22px;padding:30px;
+  flex-wrap:wrap;
+}
+.dl h3{font-size:19px;margin-bottom:6px;}
+.dl p{font-size:13.8px;color:var(--muted);max-width:42em;}
+a.disabled{
+  opacity:.55;pointer-events:none;cursor:not-allowed;
+}
+
+/* 页尾 */
+footer{
+  border-top:1px solid var(--line);padding:34px 0 26px;
+  background:#0a0f1c;
+}
+.foot-inner{
+  display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  align-items:flex-start;
+}
+.foot-inner p{font-size:13px;color:var(--muted);max-width:44em;margin-top:10px;}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);}
+.foot-links a:hover{color:var(--accent-2);}
+.copy{
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:12.5px;color:#7c869c;
+}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px;}
+  .stage{order:-1;}
+  .cards{grid-template-columns:1fr 1fr;}
+  .grid-items{grid-template-columns:1fr 1fr;}
+  .split{grid-template-columns:1fr;}
+}
+@media (max-width:600px){
+  .head-inner{padding:12px 0;}
+  .logo{font-size:15px;}
+  nav.main{order:3;width:100%;justify-content:space-between;}
+  nav.main a{padding:6px 6px;font-size:13px;}
+  .hero{padding:34px 0 40px;}
+  section{padding:38px 0;}
+  .cards,.grid-items{grid-template-columns:1fr;}
+  .row{grid-template-columns:40px 1fr;gap:12px;}
+  .row .meta{grid-column:2;font-size:12px;}
+  .hero-facts{gap:22px;}
+  .dl{padding:22px;}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap head-inner">
+    <a class="logo" href="#top" aria-label="91免费看在线观看 首页">
+      <span class="mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg>
+      </span>
+      <span>91免费看在线观看</span>
+    </a>
+    <nav class="main" aria-label="主导航">
+      <a href="#entry">观看入口</a>
+      <a href="#hot">热门片单</a>
+      <a href="#library">内容库</a>
+      <a href="#guide">观看说明</a>
+    </nav>
+    <a class="btn" href="#entry">立即进入</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">免费 · 在线 · 高清</span>
+        <h1>91免费看在线观看</h1>
+        <p class="lead">聚合免费在线观看入口的导航首页。把想看的影视、剧集与短视频，按类型、热度与更新节奏归置清楚，减少在多个页面之间来回寻找的时间，打开即可进入对应内容区。</p>
+        <div class="hero-actions">
+          <a class="btn" href="#library">浏览内容库</a>
+          <a class="btn ghost" href="#guide">先看观看说明</a>
+        </div>
+        <div class="hero-facts">
+          <div class="fact"><b>4</b><span>类观看入口</span></div>
+          <div class="fact"><b>12</b><span>个内容分区</span></div>
+          <div class="fact"><b>每日</b><span>更新热门片单</span></div>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <span class="tag">在线播放</span>
+        <div class="screen">
+          <svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" role="img">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#243055"/>
+                <stop offset="1" stop-color="#131b2e"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff5a4d"/>
+                <stop offset="1" stop-color="#ffb03a"/>
+              </linearGradient>
+            </defs>
+            <rect width="420" height="250" fill="url(#g1)"/>
+            <circle cx="330" cy="52" r="70" fill="#ff5a4d" opacity="0.14"/>
+            <circle cx="70" cy="205" r="58" fill="#ffb03a" opacity="0.12"/>
+            <rect x="26" y="30" width="150" height="9" rx="4.5" fill="#ffffff" opacity="0.22"/>
+            <rect x="26" y="50" width="94" height="8" rx="4" fill="#ffffff" opacity="0.12"/>
+            <rect x="26" y="86" width="180" height="96" rx="10" fill="#0a0f1c" stroke="#ffffff" stroke-opacity="0.08"/>
+            <polygon points="104,118 104,150 134,134" fill="url(#g2)"/>
+            <rect x="220" y="86" width="174" height="44" rx="9" fill="#ffffff" opacity="0.07"/>
+            <rect x="220" y="138" width="174" height="44" rx="9" fill="#ffffff" opacity="0.07"/>
+            <rect x="236" y="100" width="70" height="7" rx="3.5" fill="#ffffff" opacity="0.3"/>
+            <rect x="236" y="114" width="44" height="6" rx="3" fill="#ffffff" opacity="0.15"/>
+            <rect x="236" y="152" width="86" height="7" rx="3.5" fill="#ffffff" opacity="0.3"/>
+            <rect x="236" y="166" width="52" height="6" rx="3" fill="#ffffff" opacity="0.15"/>
+            <rect x="26" y="200" width="368" height="6" rx="3" fill="#ffffff" opacity="0.08"/>
+            <rect x="26" y="200" width="196" height="6" rx="3" fill="url(#g2)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 观看入口 -->
+  <section id="entry">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>四类观看入口</h2>
+        <p>按使用场景拆分入口，先判断想看的类型，再进入对应分区，避免在混杂列表里反复滑动。91免费看在线观看 的入口页以「找到内容」为第一目标。</p>
+      </div>
+      <div class="cards">
+        <a class="card" href="#library">
+          <span class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5a4d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>
+          </span>
+          <h3>影视专区</h3>
+          <p>电影、剧集、纪录片按类型聚合，支持按片名关键词筛选，详情页给出时长与语言标注。</p>
+          <span class="go">进入影视专区 →</span>
+        </a>
+        <a class="card" href="#library">
+          <span class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb03a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 012-2h9l5 5v11a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 3v6h6"/></svg>
+          </span>
+          <h3>剧集追更</h3>
+          <p>按更新节奏排列连载内容，连载中的剧集标注最新集数，方便判断是否值得从头开始。</p>
+          <span class="go">进入追更列表 →</span>
+        </a>
+        <a class="card" href="#hot">
+          <span class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff5a4d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg>
+          </span>
+          <h3>热门片单</h3>
+          <p>依据站内浏览与收藏情况汇总的片单，按周更新，适合没有明确目标时快速挑片。</p>
+          <span class="go">查看本周片单 →</span>
+        </a>
+        <a class="card" href="#guide">
+          <span class="ico" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb03a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>
+          </span>
+          <h3>短视频速览</h3>
+          <p>以短时长内容为主的速览区，单条内容控制在数分钟内，适合碎片时间浏览。</p>
+          <span class="go">进入短视频区 →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门片单 -->
+  <section id="hot" class="list-band">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>本周热门片单</h2>
+        <p>片单按品类排布，每一条给出内容定位与适合的观看场景，作为 91免费看在线观看 内容库的快速索引。</p>
+      </div>
+      <div class="rows">
+        <div class="row">
+          <span class="num">01</span>
+          <div><h4>都市剧情长片</h4><p>节奏偏慢，人物关系线完整，适合整块时间连续观看。</p></div>
+          <span class="meta">约 110 分钟</span>
+        </div>
+        <div class="row">
+          <span class="num">02</span>
+          <div><h4>悬疑推理剧集</h4><p>单集独立案件，主线贯穿全季，可从任意集切入。</p></div>
+          <span class="meta">每周更新 2 集</span>
+        </div>
+        <div class="row">
+          <span class="num">03</span>
+          <div><h4>自然纪录片</h4><p>画面与解说并重，适合投屏观看，语言标注中文字幕。</p></div>
+          <span class="meta">全 6 集</span>
+        </div>
+        <div class="row">
+          <span class="num">04</span>
+          <div><h4>轻松喜剧短片</h4><p>单条 3 至 8 分钟，情节轻快，碎片时间首选。</p></div>
+          <span class="meta">每日更新</span>
+        </div>
+        <div class="row">
+          <span class="num">05</span>
+          <div><h4>动画合辑</h4><p>按年龄段分组标注，含剧场版与短篇合集。</p></div>
+          <span class="meta">共 42 部</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 内容库 + 搜索 -->
+  <section id="library">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>内容库筛选</h2>
+        <p>输入片名关键词或选择品类，下方列表会即时过滤。所有条目均直接写在页面中，不依赖额外加载。</p>
+      </div>
+      <div class="filter-bar">
+        <input id="q" type="search" placeholder="输入片名关键词，例如：悬疑、纪录片" aria-label="按片名关键词筛选内容">
+        <div class="chips" role="group" aria-label="按品类筛选">
+          <button class="chip active" data-cat="all" type="button">全部</button>
+          <button class="chip" data-cat="电影" type="button">电影</button>
+          <button class="chip" data-cat="剧集" type="button">剧集</button>
+          <button class="chip" data-cat="纪录" type="button">纪录片</button>
+          <button class="chip" data-cat="短片" type="button">短片</button>
+        </div>
+      </div>
+      <div class="grid-items" id="items">
+        <div class="item" data-cat="电影"><span class="badge">电影</span><h4>都市剧情长片</h4><p>人物群像 · 中文字幕</p></div>
+        <div class="item" data-cat="剧集"><span class="badge">剧集</span><h4>悬疑推理剧集</h4><p>单元案件 · 更新中</p></div>
+        <div class="item" data-cat="纪录"><span class="badge">纪录片</span><h4>自然纪录片</h4><p>全 6 集 · 可投屏</p></div>
+        <div class="item" data-cat="短片"><span class="badge">短片</span><h4>轻松喜剧短片</h4><p>3–8 分钟 · 每日更新</p></div>
+        <div class="item" data-cat="电影"><span class="badge">电影</span><h4>公路旅行电影</h4><p>公路题材 · 约 96 分钟</p></div>
+        <div class="item" data-cat="剧集"><span class="badge">剧集</span><h4>家庭情感剧</h4><p>全 24 集 · 已完结</p></div>
+        <div class="item" data-cat="纪录"><span class="badge">纪录片</span><h4>城市人文纪录</h4><p>全 4 集 · 中英字幕</p></div>
+        <div class="item" data-cat="短片"><span class="badge">短片</span><h4>生活观察短片</h4><p>5 分钟上下 · 合集</p></div>
+      </div>
+      <p class="empty" id="empty">没有找到匹配的内容，换个关键词或选择「全部」再试。</p>
+    </div>
+  </section>
+
+  <!-- 说明 -->
+  <section id="guide" class="list-band">
+    <div class="wrap split">
+      <div class="prose">
+        <h2>关于 91免费看在线观看 的观看方式</h2>
+        <p><strong>91免费看在线观看</strong> 是一个以导航为核心的信息页，本身不存储视频文件，作用是把分散的在线观看入口整理到同一处，按类型与热度排序，让访问者少走弯路。</p>
+        <p>页面上的内容按「入口 → 片单 → 内容库」三层展开：先在首屏确认方向，再从片单里挑具体内容，最后在内容库用关键词或品类缩小范围。三层之间可以自由跳转，导航栏随时可用。</p>
+        <p>片单中的时长、集数与更新节奏属于内容标注，用于帮助判断观看成本，并不代表实时播放状态；连载内容的具体进度以进入对应入口后的页面为准。</p>
+        <p>对多数访问者而言，最常用的路径是「热门片单 → 内容库筛选 → 进入观看」。如果只是随手看看，直接使用首屏的浏览内容库按钮更快。</p>
+      </div>
+      <aside class="tips">
+        <h3>使用建议</h3>
+        <ul>
+          <li>先用关键词筛选，再按品类缩小范围，比逐页翻找快。</li>
+          <li>连载剧集先看最新集数标注，再决定是否从第一集开始。</li>
+          <li>短视频区单条时长短，适合等车、排队等碎片时间。</li>
+          <li>投屏观看前确认字幕语言，纪录片多为中文字幕。</li>
+          <li>页面内容会随片单更新调整，收藏本页即可随时回到入口。</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 下载 -->
+  <section>
+    <div class="wrap">
+      <div class="dl">
+        <div>
+          <h3>下载 91免费看在线观看 入口包</h3>
+          <p>把常用入口与片单整理成一份离线清单，方便在浏览器之外保留访问路径。下载入口正在准备中，开放后会在此处替换为可用地址。</p>
+        </div>
+        <a class="btn disabled" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <a class="logo" href="#top">
+          <span class="mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg>
+          </span>
+          <span>91免费看在线观看</span>
+        </a>
+        <p>91免费看在线观看 是一个在线观看入口导航页面，整理影视、剧集、纪录片与短视频的内容索引，帮助访客快速定位可观看的内容分区。</p>
+      </div>
+      <div class="foot-links">
+        <a href="#entry">观看入口</a>
+        <a href="#hot">热门片单</a>
+        <a href="#library">内容库</a>
+        <a href="#guide">观看说明</a>
+      </div>
+    </div>
+    <div class="copy">© 91免费看在线观看 · 页面内容为入口导航与内容索引，片单标注以实际页面为准。</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var items = Array.prototype.slice.call(document.querySelectorAll('#items .item'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var empty = document.getElementById('empty');
+  var cat = 'all';
+
+  function render(){
+    var kw = (q.value || '').trim().toLowerCase();
+    var shown = 0;
+    items.forEach(function(el){
+      var okCat = (cat === 'all') || (el.getAttribute('data-cat') === cat);
+      var okKw = !kw || el.textContent.toLowerCase().indexOf(kw) > -1;
+      var show = okCat && okKw;
+      el.style.display = show ? '' : 'none';
+      if(show) shown++;
+    });
+    empty.style.display = shown ? 'none' : 'block';
+  }
+
+  q.addEventListener('input', render);
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.classList.remove('active'); });
+      c.classList.add('active');
+      cat = c.getAttribute('data-cat');
+      render();
+    });
+  });
+})();
+</script>
+</body>
+  </html>
